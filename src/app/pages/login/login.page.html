@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<a href="https://www.freeiconspng.com/img/3543" title="Image from freeiconspng.com"><img src="https://www.freeiconspng.com/uploads/dollar-money-cash-icon-14.png" width="340" alt="dollar money cash icon" /></a>
+
+  <form (ngSubmit)="onLogin()">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" class="ion-margin-top">Ingresar</ion-button>
+    <ion-button expand="full" fill="clear" routerLink="/register">Crear cuenta</ion-button>
+  </form>
+</ion-content>
+

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Operaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-segment [(ngModel)]="segmento">
+    <ion-segment-button value="en-curso">En curso</ion-segment-button>
+    <ion-segment-button value="realizadas">Realizadas</ion-segment-button>
+  </ion-segment>
+
+  <!-- EN CURSO -->
+  <ion-list *ngIf="segmento === 'en-curso'">
+    <ion-item *ngFor="let op of operacionesEnCurso$ | async">
+      <ion-label>
+        <h2>{{ op.tipoOperacion | titlecase }} - {{ op.tipoDolar }}</h2>
+        <p>Monto USD: {{ op.montoUSD }} — Total: ${{ op.totalPesos | number:'1.2-2' }}</p>
+        <p>Usuario: {{ op.usuarioNombre }}</p>
+      </ion-label>
+
+      <ion-button *ngIf="esCreador(op)" slot="end" color="danger" (click)="cancelarOperacion(op)">Cancelar</ion-button>
+      <ion-button slot="end" color="success" (click)="confirmar(op)">Confirmar</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- REALIZADAS -->
+  <ion-list *ngIf="segmento === 'realizadas'">
+    <ion-item *ngFor="let op of operacionesRealizadas$ | async">
+      <ion-label>
+        <h2>{{ op.tipoOperacion | titlecase }} - {{ op.tipoDolar }}</h2>
+        <p>Monto USD: {{ op.montoUSD }} — Total: ${{ op.totalPesos | number:'1.2-2' }}</p>
+        <p>Usuario: {{ op.usuarioNombre }}</p>
+        <p *ngIf="op.confirmadoPor">Confirmado por: {{ op.confirmadoPor }}</p>
+      </ion-label>
+
+      <ion-button slot="end" color="primary" (click)="descargarPDF(op)">Descargar PDF</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+

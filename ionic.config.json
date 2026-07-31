@@ -1,0 +1,7 @@
+{
+  "name": "dollar-trade",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
