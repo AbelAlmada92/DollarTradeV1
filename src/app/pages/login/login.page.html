@@ -1,26 +1,46 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Iniciar Sesión</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="auth" [fullscreen]="true">
+  <div class="auth__wrap">
 
-<ion-content class="ion-padding">
+    <div class="brand">
+      <div class="brand__badge">
+        <ion-icon name="trending-up-outline"></ion-icon>
+      </div>
+      <h1 class="brand__title">DollarTrade</h1>
+      <p class="brand__subtitle">Gestioná tus operaciones de cambio en un solo lugar</p>
+    </div>
 
-<a href="https://www.freeiconspng.com/img/3543" title="Image from freeiconspng.com"><img src="https://www.freeiconspng.com/uploads/dollar-money-cash-icon-14.png" width="340" alt="dollar money cash icon" /></a>
+    <form (ngSubmit)="onLogin()" class="auth__form">
+      <ion-input
+        class="app-input"
+        label="Email"
+        labelPlacement="floating"
+        fill="outline"
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        required>
+      </ion-input>
 
-  <form (ngSubmit)="onLogin()">
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
-    </ion-item>
+      <ion-input
+        class="app-input"
+        label="Contraseña"
+        labelPlacement="floating"
+        fill="outline"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        required>
+      </ion-input>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
-    </ion-item>
+      <ion-button expand="block" type="submit" class="btn-primary">
+        Ingresar
+      </ion-button>
+    </form>
 
-    <ion-button expand="full" type="submit" class="ion-margin-top">Ingresar</ion-button>
-    <ion-button expand="full" fill="clear" routerLink="/register">Crear cuenta</ion-button>
-  </form>
+    <div class="auth__alt">
+      <span>¿No tenés cuenta?</span>
+      <ion-button fill="clear" size="small" routerLink="/register">Crear cuenta</ion-button>
+    </div>
+
+  </div>
 </ion-content>
-

@@ -1,2 +1,125 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+// ============================================================
+//  DollarTrade — Design tokens
+//  Modern fintech theme (light + dark). See global.scss for
+//  component-level styling that consumes these variables.
+// ============================================================
+
+:root {
+  // ---------- Brand / primary ----------
+  --ion-color-primary: #059669;
+  --ion-color-primary-rgb: 5, 150, 105;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #048457;
+  --ion-color-primary-tint: #1aa178;
+
+  --ion-color-secondary: #6366f1;
+  --ion-color-secondary-rgb: 99, 102, 241;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #575ad4;
+  --ion-color-secondary-tint: #7376f2;
+
+  // ---------- Semantic ----------
+  --ion-color-success: #059669;
+  --ion-color-success-rgb: 5, 150, 105;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #048457;
+  --ion-color-success-tint: #1aa178;
+
+  --ion-color-warning: #f59e0b;
+  --ion-color-warning-rgb: 245, 158, 11;
+  --ion-color-warning-contrast: #1f2937;
+  --ion-color-warning-contrast-rgb: 31, 41, 55;
+  --ion-color-warning-shade: #d88b0a;
+  --ion-color-warning-tint: #f6a824;
+
+  --ion-color-danger: #ef4444;
+  --ion-color-danger-rgb: 239, 68, 68;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #d23c3c;
+  --ion-color-danger-tint: #f15757;
+
+  --ion-color-medium: #64748b;
+  --ion-color-medium-rgb: 100, 116, 139;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #58667a;
+  --ion-color-medium-tint: #748297;
+
+  --ion-color-light: #f1f5f9;
+  --ion-color-light-rgb: 241, 245, 249;
+  --ion-color-light-contrast: #0f172a;
+  --ion-color-light-contrast-rgb: 15, 23, 42;
+  --ion-color-light-shade: #d4d8db;
+  --ion-color-light-tint: #f2f6fa;
+
+  --ion-color-dark: #0f172a;
+  --ion-color-dark-rgb: 15, 23, 42;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #0d1425;
+  --ion-color-dark-tint: #272e3f;
+
+  // ---------- Surfaces ----------
+  --ion-background-color: #f4f6fa;
+  --ion-background-color-rgb: 244, 246, 250;
+  --ion-text-color: #0f172a;
+  --ion-text-color-rgb: 15, 23, 42;
+
+  --ion-toolbar-background: #f4f6fa;
+  --ion-toolbar-color: #0f172a;
+  --ion-tab-bar-background: #ffffff;
+  --ion-item-background: #ffffff;
+  --ion-card-background: #ffffff;
+
+  // ---------- Typography ----------
+  --ion-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  // ---------- App tokens ----------
+  --app-muted: #64748b;
+  --app-border: #e6eaf1;
+  --app-segment-bg: #e9edf3;
+  --app-radius-lg: 20px;
+  --app-radius-md: 14px;
+  --app-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 10px 30px rgba(15, 23, 42, 0.06);
+  --app-hero-gradient: linear-gradient(135deg, #34d399 0%, #059669 100%);
+}
+
+// ============================================================
+//  Dark mode — loaded after global.scss's dark.system.css so
+//  these values win.
+// ============================================================
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-color-primary: #10b981;
+    --ion-color-primary-rgb: 16, 185, 129;
+    --ion-color-primary-contrast: #04160f;
+    --ion-color-primary-contrast-rgb: 4, 22, 15;
+    --ion-color-primary-shade: #0ea372;
+    --ion-color-primary-tint: #28c08e;
+
+    --ion-color-success: #10b981;
+    --ion-color-success-rgb: 16, 185, 129;
+    --ion-color-success-contrast: #04160f;
+    --ion-color-success-contrast-rgb: 4, 22, 15;
+
+    --ion-background-color: #0b0f1a;
+    --ion-background-color-rgb: 11, 15, 26;
+    --ion-text-color: #e6ebf3;
+    --ion-text-color-rgb: 230, 235, 243;
+
+    --ion-toolbar-background: #0b0f1a;
+    --ion-toolbar-color: #e6ebf3;
+    --ion-tab-bar-background: #10151f;
+    --ion-item-background: #151b28;
+    --ion-card-background: #151b28;
+
+    --app-muted: #94a3b8;
+    --app-border: #253044;
+    --app-segment-bg: #1b2333;
+    --app-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 30px rgba(0, 0, 0, 0.35);
+  }
+}

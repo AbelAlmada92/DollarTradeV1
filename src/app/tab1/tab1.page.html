@@ -1,75 +1,74 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Tus datos
-    </ion-title>
+    <ion-title>Mi perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-
-  <h2>¡Bienvenido!</h2>
+<ion-content class="ion-padding page">
 
   <ng-container *ngIf="usuario | async as usuario">
 
-    <!-- Mostrar datos del usuario -->
-    <ion-card *ngIf="!usuarioEditando">
-      <ion-card-header>
-        <ion-card-title>{{ usuario.nombre }} {{ usuario.apellido }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p><strong>Email:</strong> {{ usuario.email }}</p>
-        <p><strong>DNI:</strong> {{ usuario.dni }}</p>
-        <p><strong>Fecha de nacimiento:</strong> {{ usuario.fechaNacimiento }}</p>
+    <!-- Vista de datos -->
+    <ng-container *ngIf="!usuarioEditando">
+      <div class="profile">
+        <div class="profile__avatar">
+          {{ (usuario.nombre || '?').charAt(0) }}{{ (usuario.apellido || '').charAt(0) }}
+        </div>
+        <h2 class="profile__name">{{ usuario.nombre }} {{ usuario.apellido }}</h2>
+        <p class="profile__email">{{ usuario.email }}</p>
+      </div>
 
-        <ion-button fill="clear" (click)="editarUsuario(usuario)">
-          <ion-icon name="create-outline"></ion-icon> Editar
-        </ion-button>
+      <div class="info-card">
+        <div class="info-row">
+          <span class="info-row__key"><ion-icon name="card-outline"></ion-icon> DNI</span>
+          <span class="info-row__val">{{ usuario.dni }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-row__key"><ion-icon name="calendar-outline"></ion-icon> Nacimiento</span>
+          <span class="info-row__val">{{ usuario.fechaNacimiento }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-row__key"><ion-icon name="mail-outline"></ion-icon> Email</span>
+          <span class="info-row__val">{{ usuario.email }}</span>
+        </div>
+      </div>
 
-        <ion-button fill="clear" color="danger" (click)="eliminarUsuario(usuario.id)">
-          <ion-icon name="trash-outline"></ion-icon> Eliminar
+      <div class="profile__actions">
+        <ion-button expand="block" class="btn-primary" (click)="editarUsuario(usuario)">
+          <ion-icon slot="start" name="create-outline"></ion-icon>
+          Editar datos
         </ion-button>
-      </ion-card-content>
-    </ion-card>
+        <ion-button expand="block" fill="outline" color="danger" (click)="eliminarUsuario(usuario.id)">
+          <ion-icon slot="start" name="trash-outline"></ion-icon>
+          Eliminar cuenta
+        </ion-button>
+      </div>
+    </ng-container>
 
     <!-- Formulario de edición -->
-    <ion-card *ngIf="usuarioEditando">
-      <ion-card-header>
-        <ion-card-title>Editar Usuario</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input [(ngModel)]="usuarioEditando.nombre"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Apellido</ion-label>
-          <ion-input [(ngModel)]="usuarioEditando.apellido"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">DNI</ion-label>
-          <ion-input [(ngModel)]="usuarioEditando.dni"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Fecha de nacimiento</ion-label>
-          <ion-input type="date" [(ngModel)]="usuarioEditando.fechaNacimiento"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input type="email" [(ngModel)]="usuarioEditando.email"></ion-input>
-        </ion-item>
+    <div class="edit-card" *ngIf="usuarioEditando">
+      <h2 class="edit-card__title">Editar datos</h2>
 
-        <ion-button expand="block" (click)="guardarCambios()">Guardar cambios</ion-button>
-        <ion-button expand="block" fill="clear" (click)="cancelarEdicion()">Cancelar</ion-button>
-      </ion-card-content>
-    </ion-card>
+      <ion-input class="app-input" label="Nombre" labelPlacement="floating" fill="outline"
+                 [(ngModel)]="usuarioEditando.nombre"></ion-input>
+      <ion-input class="app-input" label="Apellido" labelPlacement="floating" fill="outline"
+                 [(ngModel)]="usuarioEditando.apellido"></ion-input>
+      <ion-input class="app-input" label="DNI" labelPlacement="floating" fill="outline"
+                 inputmode="numeric" [(ngModel)]="usuarioEditando.dni"></ion-input>
+      <ion-input class="app-input" label="Fecha de nacimiento" labelPlacement="floating" fill="outline"
+                 type="date" [(ngModel)]="usuarioEditando.fechaNacimiento"></ion-input>
+      <ion-input class="app-input" label="Email" labelPlacement="floating" fill="outline"
+                 type="email" [(ngModel)]="usuarioEditando.email"></ion-input>
+
+      <ion-button expand="block" class="btn-primary" (click)="guardarCambios()">Guardar cambios</ion-button>
+      <ion-button expand="block" fill="clear" color="medium" (click)="cancelarEdicion()">Cancelar</ion-button>
+    </div>
 
   </ng-container>
 
-  <ion-button expand="full" color="danger" (click)="logout()" class="ion-margin-top">
-    Cerrar Sesión
-  </ion-button>
-
 </ion-content>
-
-

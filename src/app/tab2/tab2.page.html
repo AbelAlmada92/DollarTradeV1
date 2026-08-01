@@ -1,38 +1,61 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Crear Operación</ion-title>
+    <ion-title>Nueva operación</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-item>
-    <ion-label>Tipo de operación</ion-label>
-    <ion-segment [(ngModel)]="tipoOperacion" (ionChange)="calcularTotal()">
+<ion-content class="ion-padding page">
+
+  <!-- Resultado en vivo -->
+  <div class="result" [class.result--sell]="tipoOperacion === 'venta'">
+    <span class="result__label">Total en pesos</span>
+    <div class="result__value">${{ (totalPesos || 0) | number:'1.2-2' }}</div>
+    <span class="result__hint" *ngIf="dolarSeleccionado && monto">
+      {{ monto }} USD · {{ tipoOperacion | titlecase }} {{ dolarSeleccionado.nombre }}
+    </span>
+    <span class="result__hint" *ngIf="!dolarSeleccionado || !monto">
+      Completá los datos para ver el total
+    </span>
+  </div>
+
+  <!-- Formulario -->
+  <div class="form-card">
+    <label class="form-card__label">Tipo de operación</label>
+    <ion-segment class="seg" [(ngModel)]="tipoOperacion" (ionChange)="calcularTotal()">
       <ion-segment-button value="compra">Compra</ion-segment-button>
       <ion-segment-button value="venta">Venta</ion-segment-button>
     </ion-segment>
-  </ion-item>
 
-  <ion-item>
-    <ion-label>Dólar</ion-label>
-    <ion-select [(ngModel)]="dolarSeleccionado" (ionChange)="calcularTotal()">
+    <ion-select
+      class="app-input"
+      label="Tipo de dólar"
+      labelPlacement="floating"
+      fill="outline"
+      interface="action-sheet"
+      placeholder="Seleccioná una cotización"
+      [(ngModel)]="dolarSeleccionado"
+      (ionChange)="calcularTotal()">
       <ion-select-option *ngFor="let d of cotizaciones" [value]="d">
-        {{ d.nombre }} (Compra: {{ d.compra }} / Venta: {{ d.venta }})
+        {{ d.nombre }} — Compra {{ d.compra }} / Venta {{ d.venta }}
       </ion-select-option>
     </ion-select>
-  </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Monto USD</ion-label>
-    <ion-input type="number" [(ngModel)]="monto" (ionInput)="calcularTotal()"></ion-input>
-  </ion-item>
+    <ion-input
+      class="app-input"
+      label="Monto en USD"
+      labelPlacement="floating"
+      fill="outline"
+      type="number"
+      inputmode="decimal"
+      [(ngModel)]="monto"
+      (ionInput)="calcularTotal()">
+      <span slot="start" class="input-prefix">US$</span>
+    </ion-input>
 
-  <ion-item *ngIf="totalPesos">
-    <ion-label>Total en pesos: ${{ totalPesos | number:'1.2-2' }}</ion-label>
-  </ion-item>
+    <ion-button expand="block" class="btn-primary" (click)="crearOperacion()">
+      <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+      Confirmar operación
+    </ion-button>
+  </div>
 
-  <ion-button expand="full" (click)="crearOperacion()">Confirmar</ion-button>
-  
 </ion-content>
-
-

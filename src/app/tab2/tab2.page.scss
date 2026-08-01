@@ -1,0 +1,68 @@
+.page {
+  --background: var(--ion-background-color);
+}
+
+/* ---------- Resultado en vivo ---------- */
+.result {
+  border-radius: var(--app-radius-lg);
+  padding: 26px 24px;
+  margin: 4px 0 20px;
+  color: #fff;
+  background: var(--app-hero-gradient);
+  box-shadow: 0 14px 34px rgba(var(--ion-color-primary-rgb), 0.32);
+  transition: background 0.25s ease;
+
+  &--sell {
+    background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+    box-shadow: 0 14px 34px rgba(67, 56, 202, 0.32);
+  }
+
+  &__label {
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.9;
+    letter-spacing: 0.01em;
+  }
+
+  &__value {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 6px 0 4px;
+  }
+
+  &__hint {
+    font-size: 13px;
+    opacity: 0.9;
+  }
+}
+
+/* ---------- Formulario ---------- */
+.form-card {
+  background: var(--ion-item-background);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow);
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--app-muted);
+    margin-bottom: -6px;
+  }
+
+  .btn-primary {
+    margin-top: 6px;
+  }
+}
+
+.input-prefix {
+  color: var(--app-muted);
+  font-weight: 600;
+  margin-inline-end: 6px;
+}

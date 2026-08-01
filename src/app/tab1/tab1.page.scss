@@ -1,0 +1,105 @@
+.page {
+  --background: var(--ion-background-color);
+}
+
+/* ---------- Cabecera de perfil ---------- */
+.profile {
+  text-align: center;
+  padding: 12px 0 24px;
+
+  &__avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 28px;
+    margin: 0 auto 16px;
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    background: var(--app-hero-gradient);
+    box-shadow: 0 12px 30px rgba(var(--ion-color-primary-rgb), 0.35);
+  }
+
+  &__name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 4px;
+  }
+
+  &__email {
+    color: var(--app-muted);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+  }
+}
+
+/* ---------- Tarjeta de datos ---------- */
+.info-card {
+  background: var(--ion-item-background);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow);
+  padding: 6px 18px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--app-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__key {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--app-muted);
+    font-size: 14px;
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+
+  &__val {
+    font-weight: 600;
+    font-size: 14px;
+    text-align: right;
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Formulario de edición ---------- */
+.edit-card {
+  background: var(--ion-item-background);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow);
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+}

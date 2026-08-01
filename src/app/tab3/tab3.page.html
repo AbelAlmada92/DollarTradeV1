@@ -1,51 +1,84 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>Operaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-segment [(ngModel)]="segmento">
+<ion-content class="ion-padding page">
+
+  <ion-segment class="seg" [(ngModel)]="segmento">
     <ion-segment-button value="en-curso">En curso</ion-segment-button>
     <ion-segment-button value="realizadas">Realizadas</ion-segment-button>
   </ion-segment>
 
   <!-- EN CURSO -->
-  <ion-list *ngIf="segmento === 'en-curso'">
-    <ion-item *ngFor="let op of operacionesEnCurso | async">
-      <ion-label>
-        <h2>{{ op.tipoOperacion | titlecase }} - {{ op.tipoDolar }}</h2>
-        <p>Monto USD: {{ op.montoUSD }} — Total: ${{ op.totalPesos | number:'1.2-2' }}</p>
-        <p>Usuario: {{ op.usuarioNombre }}</p>
-      </ion-label>
+  <div *ngIf="segmento === 'en-curso'">
+    <ng-container *ngIf="operacionesEnCurso | async as lista">
+      <div class="op-card" *ngFor="let op of lista">
+        <div class="op-card__head">
+          <span class="tag" [class.tag--buy]="op.tipoOperacion === 'compra'"
+                            [class.tag--sell]="op.tipoOperacion === 'venta'">
+            {{ op.tipoOperacion | titlecase }}
+          </span>
+          <span class="op-card__dollar">{{ op.tipoDolar }}</span>
+        </div>
 
-      <ion-button *ngIf="esCreador(op)" slot="end" color="danger" (click)="cancelarOperacion(op)">Cancelar</ion-button>
-      <ion-button slot="end" color="success" (click)="confirmar(op)">Confirmar</ion-button>
-    </ion-item>
-  </ion-list>
+        <div class="op-card__amount">${{ op.totalPesos | number:'1.2-2' }}</div>
+
+        <div class="op-card__meta">
+          <span><ion-icon name="cash-outline"></ion-icon> {{ op.montoUSD }} USD</span>
+          <span><ion-icon name="person-outline"></ion-icon> {{ op.usuarioNombre }}</span>
+        </div>
+
+        <div class="op-card__actions">
+          <ion-button *ngIf="esCreador(op)" fill="outline" color="danger" size="small"
+                      (click)="cancelarOperacion(op)">Cancelar</ion-button>
+          <ion-button color="success" size="small" (click)="confirmar(op)">
+            <ion-icon slot="start" name="checkmark-outline"></ion-icon>
+            Confirmar
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="empty" *ngIf="lista.length === 0">
+        <ion-icon name="hourglass-outline"></ion-icon>
+        <p>No hay operaciones en curso</p>
+      </div>
+    </ng-container>
+  </div>
 
   <!-- REALIZADAS -->
-  <ion-list *ngIf="segmento === 'realizadas'">
-    <ion-item *ngFor="let op of operacionesRealizadas | async">
-      <ion-label>
-        <h2>{{ op.tipoOperacion | titlecase }} - {{ op.tipoDolar }}</h2>
-        <p>Monto USD: {{ op.montoUSD }} — Total: ${{ op.totalPesos | number:'1.2-2' }}</p>
-        <p>Usuario: {{ op.usuarioNombre }}</p>
-        <p *ngIf="op.confirmadoPor">Confirmado por: {{ op.confirmadoPor }}</p>
-      </ion-label>
+  <div *ngIf="segmento === 'realizadas'">
+    <ng-container *ngIf="operacionesRealizadas | async as lista">
+      <div class="op-card" *ngFor="let op of lista">
+        <div class="op-card__head">
+          <span class="tag" [class.tag--buy]="op.tipoOperacion === 'compra'"
+                            [class.tag--sell]="op.tipoOperacion === 'venta'">
+            {{ op.tipoOperacion | titlecase }}
+          </span>
+          <span class="badge-done"><ion-icon name="checkmark-circle"></ion-icon> Completada</span>
+        </div>
 
-      <ion-button slot="end" color="primary" (click)="descargarPDF(op)">Descargar PDF</ion-button>
-    </ion-item>
-  </ion-list>
+        <div class="op-card__amount">${{ op.totalPesos | number:'1.2-2' }}</div>
+
+        <div class="op-card__meta">
+          <span><ion-icon name="cash-outline"></ion-icon> {{ op.montoUSD }} USD · {{ op.tipoDolar }}</span>
+          <span *ngIf="op.confirmadoPor"><ion-icon name="shield-checkmark-outline"></ion-icon> {{ op.confirmadoPor }}</span>
+        </div>
+
+        <div class="op-card__actions">
+          <ion-button fill="outline" size="small" (click)="descargarPDF(op)">
+            <ion-icon slot="start" name="download-outline"></ion-icon>
+            Descargar PDF
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="empty" *ngIf="lista.length === 0">
+        <ion-icon name="receipt-outline"></ion-icon>
+        <p>Todavía no hay operaciones realizadas</p>
+      </div>
+    </ng-container>
+  </div>
+
 </ion-content>
-
-
-
-
-
-
-
-
-
-
-

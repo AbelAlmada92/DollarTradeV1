@@ -35,3 +35,137 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* ============================================================
+   DollarTrade — Global component styling
+   A modern fintech look built on top of Ionic components.
+   ============================================================ */
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Header / toolbar ---------- */
+ion-header {
+  box-shadow: none;
+
+  &::after {
+    display: none;
+  }
+}
+
+ion-toolbar {
+  --border-width: 0;
+  --border-color: transparent;
+  --min-height: 58px;
+  --padding-top: 6px;
+  --padding-bottom: 6px;
+}
+
+ion-title {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Content ---------- */
+ion-content {
+  --background: var(--ion-background-color);
+}
+
+/* ---------- Buttons ---------- */
+ion-button {
+  --border-radius: 14px;
+  --box-shadow: none;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: 0;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}
+
+ion-button[expand] {
+  height: 52px;
+}
+
+ion-button.btn-primary {
+  --background: var(--ion-color-primary);
+  --background-activated: var(--ion-color-primary-shade);
+  --box-shadow: 0 8px 20px rgba(var(--ion-color-primary-rgb), 0.28);
+}
+
+/* ---------- Inputs / selects (outline fill) ---------- */
+ion-input,
+ion-select,
+ion-textarea {
+  --border-radius: 14px;
+  font-weight: 500;
+}
+
+.app-input {
+  --highlight-color-focused: var(--ion-color-primary);
+  margin-bottom: 2px;
+}
+
+/* ---------- Cards ---------- */
+ion-card {
+  border-radius: var(--app-radius-lg);
+  margin: 16px;
+  box-shadow: var(--app-shadow);
+  border: 1px solid var(--app-border);
+}
+
+ion-card-title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Segment (pill toggle) ---------- */
+ion-segment {
+  --background: var(--app-segment-bg);
+  border-radius: 14px;
+  padding: 4px;
+  contain: none;
+}
+
+ion-segment-button {
+  --indicator-color: var(--ion-item-background);
+  --indicator-box-shadow: 0 2px 6px rgba(15, 23, 42, 0.1);
+  --border-radius: 10px;
+  --color: var(--app-muted);
+  --color-checked: var(--ion-text-color);
+  min-height: 40px;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* ---------- Tab bar ---------- */
+ion-tab-bar {
+  --background: var(--ion-tab-bar-background);
+  border-top: 1px solid var(--app-border);
+  height: 62px;
+  padding-top: 4px;
+}
+
+ion-tab-button {
+  --color: var(--app-muted);
+  --color-selected: var(--ion-color-primary);
+  font-weight: 500;
+
+  ion-icon {
+    font-size: 24px;
+  }
+
+  ion-label {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+}
+
+/* ---------- Items ---------- */
+ion-item {
+  --border-radius: 14px;
+  --background: var(--ion-item-background);
+}

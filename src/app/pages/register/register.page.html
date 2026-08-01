@@ -1,50 +1,90 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Registro</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear cuenta</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <form (ngSubmit)="onRegister()">
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="user.nombre" name="nombre" required></ion-input>
-    </ion-item>
+<ion-content class="ion-padding page">
+  <div class="reg">
+    <p class="reg__intro">Completá tus datos para empezar a operar.</p>
 
-    <ion-item>
-      <ion-label position="floating">Apellido</ion-label>
-      <ion-input [(ngModel)]="user.apellido" name="apellido" required></ion-input>
-    </ion-item>
+    <form (ngSubmit)="onRegister()" class="reg__form">
+      <ion-input
+        class="app-input"
+        label="Nombre"
+        labelPlacement="floating"
+        fill="outline"
+        [(ngModel)]="user.nombre"
+        name="nombre"
+        required>
+      </ion-input>
 
-      <ion-item>
-        <ion-label position="floating">Fecha de Nacimiento</ion-label>
-        <ion-input 
-          type="text" 
-          placeholder="DD/MM/YYYY"
-          [(ngModel)]="user.fechaNacimiento" 
-          name="fechaNacimiento" 
-          required>
-        </ion-input>
-      </ion-item>
+      <ion-input
+        class="app-input"
+        label="Apellido"
+        labelPlacement="floating"
+        fill="outline"
+        [(ngModel)]="user.apellido"
+        name="apellido"
+        required>
+      </ion-input>
 
+      <ion-input
+        class="app-input"
+        label="Fecha de nacimiento"
+        labelPlacement="floating"
+        fill="outline"
+        type="text"
+        placeholder="DD/MM/AAAA"
+        [(ngModel)]="user.fechaNacimiento"
+        name="fechaNacimiento"
+        required>
+      </ion-input>
 
-    <ion-item>
-      <ion-label position="floating">DNI</ion-label>
-      <ion-input [(ngModel)]="user.dni" name="dni" required></ion-input>
-    </ion-item>
+      <ion-input
+        class="app-input"
+        label="DNI"
+        labelPlacement="floating"
+        fill="outline"
+        inputmode="numeric"
+        [(ngModel)]="user.dni"
+        name="dni"
+        required>
+      </ion-input>
 
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="user.email" name="email" required></ion-input>
-    </ion-item>
+      <ion-input
+        class="app-input"
+        label="Email"
+        labelPlacement="floating"
+        fill="outline"
+        type="email"
+        [(ngModel)]="user.email"
+        name="email"
+        required>
+      </ion-input>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
-    </ion-item>
+      <ion-input
+        class="app-input"
+        label="Contraseña"
+        labelPlacement="floating"
+        fill="outline"
+        type="password"
+        [(ngModel)]="user.password"
+        name="password"
+        required>
+      </ion-input>
 
-    <ion-button expand="full" type="submit" class="ion-margin-top">Registrar</ion-button>
-    <ion-button expand="full" fill="clear" routerLink="/login">Ya tengo cuenta</ion-button>
-  </form>
+      <ion-button expand="block" type="submit" class="btn-primary">
+        Registrarme
+      </ion-button>
+    </form>
+
+    <div class="reg__alt">
+      <span>¿Ya tenés cuenta?</span>
+      <ion-button fill="clear" size="small" routerLink="/login">Iniciar sesión</ion-button>
+    </div>
+  </div>
 </ion-content>
-
