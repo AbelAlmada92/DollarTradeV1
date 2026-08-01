@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/services/auth';
 import { NotificationService } from 'src/app/services/notification';
 import { Dolar } from 'src/app/interfaces/dolar.interface';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab3',
@@ -25,12 +25,16 @@ export class Tab3Page implements OnInit {
     private notify: NotificationService
   ) {}
 
-  async ngOnInit() {
-    // Obtener usuario actual
-    this.usuarioActual = await this.auth.getCurrentUser();
-
-    // Observable en tiempo real desde Firestore
-    this.operaciones = this.tradeService.getOperaciones();
+  ngOnInit() {
+    // Solo las operaciones del usuario logueado, en tiempo real.
+    // Usamos authState para esperar a que Firebase restaure la sesión.
+    this.operaciones = this.auth.authState().pipe(
+      switchMap(user => {
+        this.usuarioActual = user;
+        if (!user) return of([] as Dolar[]);
+        return this.tradeService.getOperaciones(user.uid);
+      })
+    );
 
     // Filtrar operaciones en curso (no confirmadas ni canceladas)
     this.operacionesEnCurso = this.operaciones.pipe(

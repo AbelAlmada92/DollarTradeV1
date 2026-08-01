@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, setDoc, doc, updateDoc, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, setDoc, doc, updateDoc, collectionData, query, where } from '@angular/fire/firestore';
 import { Dolar } from '../interfaces/dolar.interface';
 import { AuthService } from './auth';
 import jsPDF from 'jspdf';
@@ -21,9 +21,10 @@ export class TradeService {
     await setDoc(docRef, { ...op, fecha: new Date().toISOString() });
   }
 
-  // Observable en tiempo real
-  getOperaciones(): Observable<Dolar[]> {
-    return collectionData(this.collectionRef, { idField: 'id' }) as Observable<Dolar[]>;
+  // Observable en tiempo real — solo las operaciones del usuario indicado
+  getOperaciones(usuarioId: string): Observable<Dolar[]> {
+    const consulta = query(this.collectionRef, where('usuarioId', '==', usuarioId));
+    return collectionData(consulta, { idField: 'id' }) as Observable<Dolar[]>;
   }
 
   // Confirmar operación
