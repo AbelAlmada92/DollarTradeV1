@@ -52,12 +52,12 @@ export class NotificationService {
       message: opts.message,
       cssClass: 'app-alert',
       buttons: [
-        { text: opts.cancelText ?? 'Cancelar', role: 'cancel' },
         {
           text: opts.okText ?? 'Aceptar',
           role: 'confirm',
           cssClass: opts.danger ? 'alert-btn-danger' : '',
         },
+        { text: opts.cancelText ?? 'Cancelar', role: 'cancel' },
       ],
     });
 

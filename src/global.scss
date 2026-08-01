@@ -185,6 +185,22 @@ ion-toast.app-toast {
   }
 }
 
+/* ---------- Select de cotizaciones (popover) ---------- */
+.cotizacion-popover {
+  --width: 300px;
+  --max-height: 62vh;
+
+  &::part(content) {
+    border-radius: 16px;
+    box-shadow: var(--app-shadow);
+  }
+
+  ion-select-option,
+  .select-interface-option {
+    font-size: 15px;
+  }
+}
+
 /* ---------- Alerts (confirmación) ---------- */
 .app-alert {
   --backdrop-opacity: 0.5;

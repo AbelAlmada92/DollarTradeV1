@@ -31,12 +31,13 @@
       label="Tipo de dólar"
       labelPlacement="floating"
       fill="outline"
-      interface="action-sheet"
+      interface="popover"
+      [interfaceOptions]="{ cssClass: 'cotizacion-popover' }"
       placeholder="Seleccioná una cotización"
       [(ngModel)]="dolarSeleccionado"
       (ionChange)="calcularTotal()">
       <ion-select-option *ngFor="let d of cotizaciones" [value]="d">
-        {{ d.nombre }} — Compra {{ d.compra }} / Venta {{ d.venta }}
+        {{ d.nombre }} · {{ d.compra }} / {{ d.venta }}
       </ion-select-option>
     </ion-select>
 

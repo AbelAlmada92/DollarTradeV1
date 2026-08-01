@@ -57,6 +57,22 @@ export class Tab2Page implements OnInit {
     return;
   }
 
+  // Validación extra: confirmar antes de registrar la operación
+  this.calcularTotal();
+  const accion = this.tipoOperacion === 'compra' ? 'comprar' : 'vender';
+  const usd = Number(this.monto).toLocaleString('es-AR');
+  const pesos = this.totalPesos.toLocaleString('es-AR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  const confirmado = await this.notify.confirm({
+    header: '¿Confirmás la operación?',
+    message: `Vas a ${accion} US$ ${usd} por $${pesos}.`,
+    okText: this.tipoOperacion === 'compra' ? 'Comprar' : 'Vender',
+  });
+  if (!confirmado) return;
+
   const usuario = await this.auth.getCurrentUser(); // ✅ Asegúrate de esperar la promesa
   const usuarioNombre = usuario?.email || 'Anónimo';
   const usuarioId = usuario?.uid || 'sin-id';
