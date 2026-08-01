@@ -6,6 +6,7 @@ import { NotificationService } from 'src/app/services/notification';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
   standalone: false,
 })
 export class LoginPage {
@@ -26,6 +27,10 @@ export class LoginPage {
       console.error('Error al iniciar sesión:', error);
       this.notify.error('No pudimos iniciar sesión. Revisá tu email y contraseña.');
     }
+  }
+
+  olvideClave() {
+    this.notify.info('Para restablecer tu clave, contactá al administrador.');
   }
 }
 

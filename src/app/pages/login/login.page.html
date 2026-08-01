@@ -1,46 +1,50 @@
 <ion-content class="auth" [fullscreen]="true">
   <div class="auth__wrap">
 
+    <!-- Logo + wordmark (lockup horizontal, estilo Mercado Pago) -->
     <div class="brand">
       <div class="brand__badge">
         <ion-icon name="trending-up-outline"></ion-icon>
       </div>
-      <h1 class="brand__title">DollarTrade</h1>
-      <p class="brand__subtitle">Gestioná tus operaciones de cambio en un solo lugar</p>
+      <div class="brand__word">
+        <span class="brand__word-1">Dollar</span>
+        <span class="brand__word-2">Trade</span>
+      </div>
     </div>
 
     <form (ngSubmit)="onLogin()" class="auth__form">
       <ion-input
-        class="app-input"
-        label="Email"
-        labelPlacement="floating"
-        fill="outline"
+        class="app-input line"
+        placeholder="Email"
+        aria-label="Email"
         type="email"
         [(ngModel)]="email"
         name="email"
         required>
+        <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
       </ion-input>
 
       <ion-input
-        class="app-input"
-        label="Contraseña"
-        labelPlacement="floating"
-        fill="outline"
+        class="app-input line"
+        placeholder="Clave"
+        aria-label="Clave"
         type="password"
         [(ngModel)]="password"
         name="password"
         required>
+        <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
       </ion-input>
 
-      <ion-button expand="block" type="submit" class="btn-primary">
+      <ion-button expand="block" type="submit" class="btn-primary btn-pill">
         Ingresar
       </ion-button>
     </form>
 
-    <div class="auth__alt">
-      <span>¿No tenés cuenta?</span>
-      <ion-button fill="clear" size="small" routerLink="/register">Crear cuenta</ion-button>
+    <div class="auth__foot">
+      <a class="auth__link" tabindex="0" (click)="olvideClave()">No sé mi clave</a>
+      <span class="auth__sep"></span>
+      <a class="auth__link" tabindex="0" routerLink="/register">Crear cuenta</a>
     </div>
 
   </div>

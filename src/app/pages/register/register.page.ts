@@ -6,6 +6,7 @@ import { NotificationService } from 'src/app/services/notification';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
   standalone: false,
 })
 export class RegisterPage {

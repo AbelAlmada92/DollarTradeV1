@@ -6,68 +6,101 @@
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   max-width: 440px;
   margin: 0 auto;
-  padding: 32px 24px calc(32px + env(safe-area-inset-bottom));
+  padding: 48px 26px calc(28px + env(safe-area-inset-bottom));
 }
 
+/* ---------- Logo + wordmark ---------- */
 .brand {
-  text-align: center;
-  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 24px 0 48px;
 
   &__badge {
-    width: 76px;
-    height: 76px;
-    border-radius: 24px;
-    margin: 0 auto 20px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
     display: grid;
     place-items: center;
     background: var(--app-hero-gradient);
-    box-shadow: 0 12px 30px rgba(var(--ion-color-primary-rgb), 0.35);
+    box-shadow: 0 10px 24px rgba(var(--ion-color-primary-rgb), 0.32);
 
     ion-icon {
-      font-size: 38px;
+      font-size: 30px;
       color: #fff;
     }
   }
 
-  &__title {
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin: 0 0 8px;
+  &__word {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.02;
+    text-align: left;
   }
 
-  &__subtitle {
-    color: var(--app-muted);
-    font-size: 15px;
-    line-height: 1.5;
-    max-width: 300px;
-    margin: 0 auto;
+  &__word-1,
+  &__word-2 {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  &__word-1 {
+    color: var(--ion-text-color);
+  }
+
+  &__word-2 {
+    color: var(--ion-color-primary);
   }
 }
 
+/* ---------- Formulario (inputs tipo línea) ---------- */
 .auth__form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 22px;
 
-  .btn-primary {
-    margin-top: 8px;
+  .line {
+    --border-color: var(--app-border);
+    --highlight-color-focused: var(--ion-color-primary);
+    --padding-start: 0;
+    --border-radius: 0;
+
+    ion-icon[slot='start'] {
+      color: var(--app-muted);
+      font-size: 20px;
+      margin-inline-end: 12px;
+    }
+  }
+
+  .btn-pill {
+    --border-radius: 26px;
+    margin-top: 14px;
   }
 }
 
-.auth__alt {
-  margin-top: 24px;
-  text-align: center;
+/* ---------- Pie con enlaces ---------- */
+.auth__foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 28px;
+}
+
+.auth__link {
   color: var(--app-muted);
   font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
 
-  ion-button {
-    --padding-start: 6px;
-    --padding-end: 6px;
-    font-weight: 600;
-    vertical-align: baseline;
-  }
+.auth__sep {
+  width: 1px;
+  height: 15px;
+  background: var(--app-border);
 }
