@@ -28,9 +28,5 @@ export class LoginPage {
       this.notify.error('No pudimos iniciar sesión. Revisá tu email y contraseña.');
     }
   }
-
-  olvideClave() {
-    this.notify.info('Para restablecer tu clave, contactá al administrador.');
-  }
 }
 
