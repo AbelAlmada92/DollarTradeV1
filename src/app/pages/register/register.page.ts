@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth';
+import { NotificationService } from 'src/app/services/notification';
 
 @Component({
   selector: 'app-register',
@@ -17,16 +18,20 @@ export class RegisterPage {
     password: ''
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private notify: NotificationService
+  ) {}
 
   async onRegister() {
     try {
       await this.authService.register(this.user);
-      alert('Usuario registrado correctamente');
+      this.notify.success('Cuenta creada correctamente');
       this.router.navigate(['/login']);
     } catch (error) {
       console.error('Error en registro:', error);
-      alert('Error al registrar: ' + (error as any).message);
+      this.notify.error('No se pudo crear la cuenta. Intentá de nuevo.');
     }
   }
 }

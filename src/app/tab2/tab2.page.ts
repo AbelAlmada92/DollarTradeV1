@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DollarService } from 'src/app/services/dolar';
 import { TradeService } from 'src/app/services/trade';
 import { AuthService } from 'src/app/services/auth';
+import { NotificationService } from 'src/app/services/notification';
 import { Dolar } from 'src/app/interfaces/dolar.interface';
 
 @Component({
@@ -21,7 +22,8 @@ export class Tab2Page implements OnInit {
   constructor(
     private dollarService: DollarService,
     private tradeService: TradeService,
-    private auth: AuthService
+    private auth: AuthService,
+    private notify: NotificationService
   ) {}
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class Tab2Page implements OnInit {
   // 🔹 Crear una nueva operación
   async crearOperacion() {
   if (!this.dolarSeleccionado || !this.monto) {
-    alert('Completa todos los campos antes de confirmar');
+    this.notify.warning('Completá todos los campos antes de confirmar');
     return;
   }
 
@@ -72,10 +74,10 @@ export class Tab2Page implements OnInit {
 
   try {
     await this.tradeService.crearOperacion(nuevaOperacion);
-    alert('✅ Operación creada con éxito');
+    this.notify.success('Operación creada con éxito');
   } catch (err) {
     console.error('Error al crear operación:', err);
-    alert('❌ Error al crear la operación');
+    this.notify.error('No se pudo crear la operación');
   }
 
   // Reset de valores

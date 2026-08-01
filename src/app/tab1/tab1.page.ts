@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth';
+import { NotificationService } from 'src/app/services/notification';
 import { Firestore, doc, docData, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -21,7 +22,8 @@ export class Tab1Page implements OnInit {
   constructor(
     private auth: AuthService,
     private firestore: Firestore,
-    private router: Router
+    private router: Router,
+    private notify: NotificationService
   ) {}
 
   ngOnInit() {
@@ -57,6 +59,7 @@ export class Tab1Page implements OnInit {
       email: this.usuarioEditando.email
     });
     this.usuarioEditando = null;
+    this.notify.success('Datos actualizados');
   }
 
   // Cancelar edición
@@ -66,7 +69,14 @@ export class Tab1Page implements OnInit {
 
   // Eliminar usuario y redirigir al login
   async eliminarUsuario(uid: string) {
-    if (!confirm('¿Seguro que deseas eliminar tu cuenta?')) return;
+    const confirmado = await this.notify.confirm({
+      header: 'Eliminar cuenta',
+      message: '¿Seguro que deseas eliminar tu cuenta? Esta acción no se puede deshacer.',
+      okText: 'Eliminar',
+      danger: true,
+    });
+    if (!confirmado) return;
+
     const docRef = doc(this.firestore, `users/${uid}`);
     await deleteDoc(docRef);
     await this.auth.logout();

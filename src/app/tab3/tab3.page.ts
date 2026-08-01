@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
 import { TradeService } from 'src/app/services/trade';
 import { AuthService } from 'src/app/services/auth';
+import { NotificationService } from 'src/app/services/notification';
 import { Dolar } from 'src/app/interfaces/dolar.interface';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -22,7 +22,7 @@ export class Tab3Page implements OnInit {
   constructor(
     private tradeService: TradeService,
     private auth: AuthService,
-    private toastController: ToastController
+    private notify: NotificationService
   ) {}
 
   async ngOnInit() {
@@ -47,24 +47,32 @@ export class Tab3Page implements OnInit {
   async confirmar(op: Dolar) {
     try {
       await this.tradeService.confirmarOperacion(op);
-      this.mostrarToast('✅ Operación confirmada', 'success');
+      this.notify.success('Operación confirmada');
     } catch (error) {
       console.error(error);
-      this.mostrarToast('⚠️ No se pudo confirmar', 'warning');
+      this.notify.warning('No se pudo confirmar');
     }
   }
 
   // Cancelar operación (solo para el creador)
   async cancelarOperacion(op: Dolar) {
     if (!this.esCreador(op)) return;
-    if (!confirm('¿Seguro que deseas cancelar esta operación?')) return;
+
+    const confirmado = await this.notify.confirm({
+      header: 'Cancelar operación',
+      message: '¿Seguro que deseas cancelar esta operación?',
+      okText: 'Sí, cancelar',
+      cancelText: 'Volver',
+      danger: true,
+    });
+    if (!confirmado) return;
 
     try {
       await this.tradeService.cancelarOperacion(op.id);
-      this.mostrarToast('❌ Operación cancelada', 'danger');
+      this.notify.info('Operación cancelada');
     } catch (error) {
       console.error(error);
-      this.mostrarToast('⚠️ No se pudo cancelar', 'warning');
+      this.notify.warning('No se pudo cancelar');
     }
   }
 
@@ -77,18 +85,6 @@ export class Tab3Page implements OnInit {
   descargarPDF(op: Dolar) {
     const esCreador = this.esCreador(op);
     this.tradeService.generarComprobante(op, esCreador);
-  }
-
-  // Mostrar toast
-  async mostrarToast(mensaje: string, color: string = 'primary') {
-    const toast = await this.toastController.create({
-      message: mensaje,
-      duration: 2000,
-      color,
-      position: 'bottom',
-      icon: color === 'danger' ? 'close-circle' : 'checkmark-circle',
-    });
-    await toast.present();
   }
 }
 

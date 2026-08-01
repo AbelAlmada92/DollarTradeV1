@@ -169,3 +169,42 @@ ion-item {
   --border-radius: 14px;
   --background: var(--ion-item-background);
 }
+
+/* ---------- Toasts ---------- */
+ion-toast.app-toast {
+  --border-radius: 14px;
+  --box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+  font-weight: 500;
+
+  &::part(message) {
+    font-size: 14px;
+  }
+
+  &::part(icon) {
+    font-size: 20px;
+  }
+}
+
+/* ---------- Alerts (confirmación) ---------- */
+.app-alert {
+  --backdrop-opacity: 0.5;
+
+  .alert-wrapper {
+    border-radius: 20px;
+    box-shadow: var(--app-shadow);
+  }
+
+  .alert-title {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .alert-button {
+    text-transform: none;
+    font-weight: 600;
+  }
+
+  .alert-button.alert-btn-danger {
+    color: var(--ion-color-danger);
+  }
+}
