@@ -22,18 +22,4 @@
       margin-top: 8px;
     }
   }
-
-  &__alt {
-    margin-top: 20px;
-    text-align: center;
-    color: var(--app-muted);
-    font-size: 14px;
-
-    ion-button {
-      --padding-start: 6px;
-      --padding-end: 6px;
-      font-weight: 600;
-      vertical-align: baseline;
-    }
-  }
 }

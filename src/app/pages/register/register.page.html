@@ -37,11 +37,9 @@
         label="Fecha de nacimiento"
         labelPlacement="floating"
         fill="outline"
-        type="text"
-        placeholder="DD/MM/AAAA"
-        [(ngModel)]="user.fechaNacimiento"
-        name="fechaNacimiento"
-        required>
+        type="date"
+        [max]="hoy"
+        (ionChange)="onFechaChange($event)">
       </ion-input>
 
       <ion-input
@@ -82,10 +80,5 @@
         Registrarme
       </ion-button>
     </form>
-
-    <div class="reg__alt">
-      <span>¿Ya tenés cuenta?</span>
-      <ion-button fill="clear" size="small" routerLink="/login">Iniciar sesión</ion-button>
-    </div>
   </div>
 </ion-content>

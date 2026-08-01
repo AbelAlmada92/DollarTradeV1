@@ -19,11 +19,22 @@ export class RegisterPage {
     password: ''
   };
 
+  // Fecha máxima seleccionable en el calendario (hoy), formato AAAA-MM-DD
+  hoy = new Date().toISOString().substring(0, 10);
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private notify: NotificationService
   ) {}
+
+  // El date picker nativo devuelve AAAA-MM-DD; lo guardamos como DD/MM/AAAA
+  onFechaChange(ev: CustomEvent) {
+    const val = (ev.detail as { value?: string }).value;
+    if (!val) return;
+    const [yyyy, mm, dd] = val.substring(0, 10).split('-');
+    this.user.fechaNacimiento = `${dd}/${mm}/${yyyy}`;
+  }
 
   async onRegister() {
     try {
