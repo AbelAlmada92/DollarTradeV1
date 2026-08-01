@@ -12,7 +12,7 @@
 
   <!-- EN CURSO -->
   <ion-list *ngIf="segmento === 'en-curso'">
-    <ion-item *ngFor="let op of operacionesEnCurso$ | async">
+    <ion-item *ngFor="let op of operacionesEnCurso | async">
       <ion-label>
         <h2>{{ op.tipoOperacion | titlecase }} - {{ op.tipoDolar }}</h2>
         <p>Monto USD: {{ op.montoUSD }} — Total: ${{ op.totalPesos | number:'1.2-2' }}</p>
@@ -26,7 +26,7 @@
 
   <!-- REALIZADAS -->
   <ion-list *ngIf="segmento === 'realizadas'">
-    <ion-item *ngFor="let op of operacionesRealizadas$ | async">
+    <ion-item *ngFor="let op of operacionesRealizadas | async">
       <ion-label>
         <h2>{{ op.tipoOperacion | titlecase }} - {{ op.tipoDolar }}</h2>
         <p>Monto USD: {{ op.montoUSD }} — Total: ${{ op.totalPesos | number:'1.2-2' }}</p>

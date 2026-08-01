@@ -22,7 +22,7 @@ export class TradeService {
   }
 
   // Observable en tiempo real
-  getOperaciones$(): Observable<Dolar[]> {
+  getOperaciones(): Observable<Dolar[]> {
     return collectionData(this.collectionRef, { idField: 'id' }) as Observable<Dolar[]>;
   }
 

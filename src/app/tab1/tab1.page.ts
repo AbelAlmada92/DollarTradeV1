@@ -14,7 +14,7 @@ import { User } from '@angular/fire/auth';
 })
 export class Tab1Page implements OnInit {
 
-  usuario$: Observable<any> = of(null);  // Observable del usuario logueado
+  usuario: Observable<{ id: string; nombre: string; apellido: string; email: string; dni: string; fechaNacimiento: string } | null> = of(null);
   usuarioEditando: any = null;
   usuarioActual: User | null = null;
 
@@ -26,7 +26,7 @@ export class Tab1Page implements OnInit {
 
   ngOnInit() {
     // Observamos el estado de autenticación
-    this.usuario$ = this.auth.authState$().pipe(
+    this.usuario = this.auth.authState().pipe(
       switchMap(user => {
         if (user) {
           this.usuarioActual = user;

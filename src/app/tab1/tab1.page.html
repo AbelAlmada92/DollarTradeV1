@@ -10,7 +10,7 @@
 
   <h2>¡Bienvenido!</h2>
 
-  <ng-container *ngIf="usuario$ | async as usuario">
+  <ng-container *ngIf="usuario | async as usuario">
 
     <!-- Mostrar datos del usuario -->
     <ion-card *ngIf="!usuarioEditando">

@@ -32,7 +32,7 @@ export class AuthService {
     getCurrentUser(): User | null {
     return this.auth.currentUser;
   }
-  authState$(): Observable<User | null> {
+  authState(): Observable<User | null> {
     return new Observable(subscriber => {
       return onAuthStateChanged(this.auth, user => subscriber.next(user));
     });

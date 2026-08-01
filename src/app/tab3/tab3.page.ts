@@ -13,9 +13,9 @@ import { map } from 'rxjs/operators';
   standalone: false,
 })
 export class Tab3Page implements OnInit {
-  operaciones$: Observable<Dolar[]> = of([]);
-  operacionesEnCurso$: Observable<Dolar[]> = of([]);
-  operacionesRealizadas$: Observable<Dolar[]> = of([]);
+  operaciones: Observable<Dolar[]> = of([]);
+  operacionesEnCurso: Observable<Dolar[]> = of([]);
+  operacionesRealizadas: Observable<Dolar[]> = of([]);
   segmento: 'en-curso' | 'realizadas' = 'en-curso';
   usuarioActual: any;
 
@@ -30,15 +30,15 @@ export class Tab3Page implements OnInit {
     this.usuarioActual = await this.auth.getCurrentUser();
 
     // Observable en tiempo real desde Firestore
-    this.operaciones$ = this.tradeService.getOperaciones$();
+    this.operaciones = this.tradeService.getOperaciones();
 
     // Filtrar operaciones en curso (no confirmadas ni canceladas)
-    this.operacionesEnCurso$ = this.operaciones$.pipe(
+    this.operacionesEnCurso = this.operaciones.pipe(
       map(ops => ops.filter(op => !op.confirmado && !op.cancelado))
     );
 
     // Filtrar operaciones realizadas (confirmadas y no canceladas)
-    this.operacionesRealizadas$ = this.operaciones$.pipe(
+    this.operacionesRealizadas = this.operaciones.pipe(
       map(ops => ops.filter(op => op.confirmado && !op.cancelado))
     );
   }
