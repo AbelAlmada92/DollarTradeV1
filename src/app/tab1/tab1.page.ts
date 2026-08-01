@@ -14,7 +14,7 @@ import { User } from '@angular/fire/auth';
 })
 export class Tab1Page implements OnInit {
 
-  usuario: Observable<{ id: string; nombre: string; apellido: string; email: string; dni: string; fechaNacimiento: string } | null> = of(null);
+  usuario: Observable<{ id: string; nombre: string; apellido: string; email: string; dni: string; fechaNacimiento: string } | null | undefined> = of(null);
   usuarioEditando: any = null;
   usuarioActual: User | null = null;
 
@@ -31,7 +31,7 @@ export class Tab1Page implements OnInit {
         if (user) {
           this.usuarioActual = user;
           const userDoc = doc(this.firestore, `users/${user.uid}`);
-          return docData(userDoc, { idField: 'id' });
+          return docData(userDoc, { idField: 'id' }) as Observable<{ id: string; nombre: string; apellido: string; email: string; dni: string; fechaNacimiento: string }>;
         } else {
           this.router.navigate(['/login']);
           return of(null);
